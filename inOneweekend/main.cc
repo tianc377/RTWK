@@ -7,11 +7,11 @@
 #include "sphere.h"
 #include "camera.h"
 
-#include <iostream>
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb-master/stb_image.h"
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb-master/stb_image_write.h"
+
+// #define STB_IMAGE_IMPLEMENTATION
+// #include "stb-master/stb_image.h"
+// #define STB_IMAGE_WRITE_IMPLEMENTATION
+// #include "stb-master/stb_image_write.h"
 
 
 
@@ -43,17 +43,11 @@ color ray_color(const ray& r, const hittable& world) {
     return (1.0 - t)* color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
 }
 
-int main() {
-
-    // Image
-    constexpr auto aspect_ratio = 16.0/9.0;
-    constexpr int image_width = 400;
-    constexpr int image_height = static_cast<int>(image_width / aspect_ratio);
-    constexpr int samples_per_pixel = 50;
-    //constexpr int data_size = 360000;//image_width*image_height*3;
-    unsigned char data[image_width* image_height* 3];
-    int index = 0;
-
+int main() 
+{
+    
+    constexpr int data_size = image_width*image_height*3;
+    unsigned char data[data_size];
 
     //world
     hittable_list world;
@@ -68,6 +62,7 @@ int main() {
 
     std::cerr << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
+
     for (int j = image_height-1; j >= 0; --j) {
         std::cerr << "\rScanlines_remaining:" << j << ' ' << std::flush;
         for (int i = 0; i < image_width; ++i) {
@@ -81,11 +76,11 @@ int main() {
             }
 
             // color pixel_color(r, g, b);
-            write_color(std::cout, pixel_color, samples_per_pixel, image_width,image_height );
+            write_color(std::cout, pixel_color, data);
             
-            data[index++] = static_cast<int>(256 * clamp(pixel_color.x()/ samples_per_pixel, 0.0, 0.999));
-            data[index++] = static_cast<int>( 256 * clamp(pixel_color.y()/ samples_per_pixel, 0.0, 0.999));
-            data[index++] = static_cast<int>( 256 * clamp(pixel_color.z()/ samples_per_pixel, 0.0, 0.999));
+            // data[index++] = static_cast<int>(256 * clamp(pixel_color.x()/ samples_per_pixel, 0.0, 0.999));
+            // data[index++] = static_cast<int>( 256 * clamp(pixel_color.y()/ samples_per_pixel, 0.0, 0.999));
+            // data[index++] = static_cast<int>( 256 * clamp(pixel_color.z()/ samples_per_pixel, 0.0, 0.999));
             
             
             
@@ -94,6 +89,6 @@ int main() {
         }
     }
     std::cerr << "\nDone.\n";
-    stbi_write_png("antialise_sphere.png", image_width, image_height, 3, data, image_width*3);
+    stbi_write_png("antialise_sphere2.png", image_width, image_height, 3, data, image_width*3);
 
 }
