@@ -15,9 +15,9 @@ constexpr int image_width = 400;
 constexpr int image_height = static_cast<int>(image_width / aspect_ratio);
 constexpr int samples_per_pixel = 50;
 
-void write_color(std::ostream &out, color pixel_color, unsigned char* data) 
+void write_color(std::ostream &out, color pixel_color, unsigned char* data, int& index) 
 {    
-    int index = 0;
+    
 
     auto r = pixel_color.x();
     auto g = pixel_color.y();
@@ -25,9 +25,9 @@ void write_color(std::ostream &out, color pixel_color, unsigned char* data)
 
     // Divide the color by the number of samples.
     auto scale = 1.0/ samples_per_pixel;
-    r *= scale;
-    g *= scale;
-    b *= scale;
+    r = sqrt(r *scale);
+    g = sqrt(g *scale);
+    b = sqrt(b *scale);
 
     data[index++] = static_cast<int>(256 * clamp(r, 0.0, 0.999));
     data[index++] = static_cast<int>(256 * clamp(g, 0.0, 0.999));
