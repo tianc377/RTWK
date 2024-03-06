@@ -97,6 +97,6 @@ int main()
         }
     }
     std::cerr << "\nDone.\n";
-    stbi_write_png("metal_material_fuzz.png", image_width, image_height, 3, data, image_width*3);
+    stbi_write_png("dielectric_material_fuzz.png", image_width, image_height, 3, data, image_width*3);
 
 }

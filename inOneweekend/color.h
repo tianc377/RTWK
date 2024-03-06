@@ -11,8 +11,8 @@
 
 // Image
 constexpr auto aspect_ratio = 16.0/9.0;
-constexpr int image_width = 400;
-constexpr int image_height = static_cast<int>(image_width / aspect_ratio);
+constexpr int image_width = 256;
+constexpr int image_height = 256;//static_cast<int>(image_width / aspect_ratio);
 constexpr int samples_per_pixel = 50;
 
 void write_color(std::ostream &out, color pixel_color, unsigned char* data, int& index) 
