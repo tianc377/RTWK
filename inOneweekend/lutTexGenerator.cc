@@ -295,8 +295,10 @@ int main()
     
     for (int j = 0; j < image_height; ++j) 
     {
-        //(int j = image_height-1; j >= 0; --j) {
-        std::cerr << "\rScanlines_remaining:" << j << ' ' << std::flush;
+        if (j != 0 && j % idInterval == 0)
+        {
+            ++id;
+        }
 
         for (int i = 0; i < image_width; ++i)
         {
@@ -314,11 +316,6 @@ int main()
             }
 
             write_color(std::cout, pixel_color, data, index);
-        }
-
-        if (j >= idInterval && (j % idInterval == 0))
-        {
-            ++id;
         }
     }
 
