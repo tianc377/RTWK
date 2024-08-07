@@ -13,7 +13,7 @@
 constexpr auto aspect_ratio = 16.0/9.0;
 constexpr int image_width = 256;
 constexpr int image_height = 256;//static_cast<int>(image_width / aspect_ratio);
-constexpr int samples_per_pixel = 50;
+constexpr int samples_per_pixel = 128;
 
 void write_color(std::ostream &out, color pixel_color, unsigned char* data, int& index) 
 {    
@@ -29,14 +29,14 @@ void write_color(std::ostream &out, color pixel_color, unsigned char* data, int&
     g = sqrt(g *scale);
     b = sqrt(b *scale);
 
-    data[index++] = static_cast<int>(256 * clamp(r, 0.0, 0.999));
-    data[index++] = static_cast<int>(256 * clamp(g, 0.0, 0.999));
-    data[index++] = static_cast<int>(256 * clamp(b, 0.0, 0.999));
+    data[index++] = static_cast<int>(256 * clamp(r, 0.0, 0.999999));
+    data[index++] = static_cast<int>(256 * clamp(g, 0.0, 0.999999));
+    data[index++] = static_cast<int>(256 * clamp(b, 0.0, 0.999999));
 
     // Write the translated [0,255] value of each color component.
-    out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '
-        << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << ' '
-        << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << '\n';
+    out << static_cast<int>(256 * clamp(r, 0.0, 0.999999)) << ' '
+        << static_cast<int>(256 * clamp(g, 0.0, 0.999999)) << ' '
+        << static_cast<int>(256 * clamp(b, 0.0, 0.999999)) << '\n';
     
     
 
